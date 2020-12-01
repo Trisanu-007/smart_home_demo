@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:smart_home_demo/classes/data.dart';
 import 'package:smart_home_demo/constants/constants.dart';
@@ -63,7 +64,7 @@ class _HomeState extends State<Home> {
   }
 
   void fillInitialData() async {
-    DataLed dt = await getDataFromApi();
+    DataLed dt = (await getDataFromApi());
     setState(() {
       _dataLed = dt;
       brightness = _dataLed.lastentry.toDouble();
@@ -170,7 +171,7 @@ class _HomeState extends State<Home> {
                     Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        "Value of brightness :",
+                        "Value :",
                         style: TextStyle(
                           fontSize: 15.0,
                           //fontWeight: FontWeight.bold,
@@ -207,7 +208,7 @@ class _HomeState extends State<Home> {
                     Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        "${_dataLed.updatedAt}",
+                        "${_dataLed.updatedAt.replaceAll('T', ", ")}",
                         style: TextStyle(
                           fontSize: 15.0,
                           fontWeight: FontWeight.bold,
@@ -222,7 +223,7 @@ class _HomeState extends State<Home> {
                     Container(
                       padding: EdgeInsets.all(10.0),
                       child: Text(
-                        "Change the brightness:",
+                        "Change the value :",
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
@@ -269,19 +270,22 @@ class _HomeState extends State<Home> {
                               print(res);
                               setState(() {
                                 message = res;
+                                _dataLed.lastentry = brightness.round();
                               });
                             }),
                 ),
-                Container(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    "$message",
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                message != null
+                    ? Container(
+                        padding: EdgeInsets.all(10.0),
+                        child: Text(
+                          "$message",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    : Container(),
                 // );
               ],
             ),
