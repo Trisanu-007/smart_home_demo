@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:smart_home_demo/constants/form_field_design.dart';
+import 'package:http/http.dart' as http;
+import 'package:smart_home_demo/constants/constants.dart';
+import 'package:smart_home_demo/classes/cost.dart';
 
 class CostsPage extends StatefulWidget {
   @override
@@ -8,16 +12,52 @@ class CostsPage extends StatefulWidget {
 }
 
 class _CostsPageState extends State<CostsPage> {
+  final String rApiKey = readApiKey;
+  final String wApiKey = writeApiKey;
   static const cost = 12.0;
   final _formKey = GlobalKey<FormState>();
   final List<String> days = ["1", "5", "10", "15", "30"];
   String curr_day = "1";
+  static List<CostData> costData;
+
+  void getCostList() async {
+    http.Response response = await http.get(
+      Uri.encodeFull(
+          "https://api.thingspeak.com/channels/1214545/fields/3.json?api_key=$rApiKey&sum=daily&days=$curr_day"),
+    );
+    if (response.statusCode == 200) {
+      var parsedJson = json.decode(response.body);
+      print(parsedJson);
+      var feeds = parsedJson["feeds"];
+      List<CostData> _costs = new List<CostData>();
+      for (int i = 0; i < feeds.length - 1; i++) {
+        var costData = CostData.fromJson(feeds[i]);
+        _costs.add(costData);
+      }
+      /*
+      for (int i = 0; i < _costs.length; i++) {
+        print(_costs[i].value);
+      }
+      */
+      setState(() {
+        costData = _costs.reversed.toList();
+      });
+    } else {
+      print("Error!");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    costData = new List<CostData>();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Form(
-        child: ListView(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -43,7 +83,7 @@ class _CostsPageState extends State<CostsPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "Find out your cost :",
+                "Find out your cost per day (incl. today):",
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.grey,
@@ -69,9 +109,40 @@ class _CostsPageState extends State<CostsPage> {
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: RaisedButton(
                 child: Text("Check !"),
-                onPressed: () {},
+                color: Colors.blue,
+                onPressed: () {
+                  getCostList();
+                },
               ),
             ),
+            costData.length > 0
+                ? Container(
+                    child: Expanded(
+                      child: ListView.builder(
+                        //reverse: true,
+                        itemCount: costData.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          CostData costdata = costData[index];
+                          return Card(
+                            child: ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor: Colors.blue,
+                                child: Text("${index + 1}"),
+                              ),
+                              title: costdata.value == "NA"
+                                  ? Text("Cost : Not found")
+                                  : Text("Cost : Rs.${costdata.value}"),
+                              isThreeLine: true,
+                              subtitle: Text(
+                                "Date:${costdata.date}  Message:${costdata.message}",
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),

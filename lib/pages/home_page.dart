@@ -243,36 +243,55 @@ class _HomeState extends State<Home> {
                   ],
                 ),
 
-                Container(
-                  child: Slider(
-                    value: brightness,
-                    min: 0.0,
-                    max: 255.0,
-                    divisions: 17,
-                    activeColor: Colors.yellow[100 + brightness.round()],
-                    onChanged: (double val) {
-                      setState(() {
-                        brightness = val;
-                        hasChanged = true;
-                      });
-                    },
+                Center(
+                  child: Row(
+                    children: [
+                      Container(
+                        child: Switch(
+                          value: brightness > 0 ? true : false,
+                          activeTrackColor: Colors.blue,
+                          activeColor: Colors.green,
+                          onChanged: (val) {
+                            setState(() {
+                              brightness = val == true ? 1 : 0;
+                              hasChanged = true;
+                            });
+                          },
+                        ),
+                        /*
+                        child: Slider(
+                          value: brightness,
+                          min: 0.0,
+                          max: 255.0,
+                          divisions: 17,
+                          activeColor: Colors.yellow[100 + brightness.round()],
+                          onChanged: (double val) {
+                            setState(() {
+                              brightness = val;
+                              hasChanged = true;
+                            });
+                          },
+                        ),
+                        */
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
+                        child: RaisedButton(
+                            color: Colors.blue,
+                            child: Text("Update"),
+                            onPressed: hasChanged == false
+                                ? null
+                                : () async {
+                                    var res = await updateData();
+                                    print(res);
+                                    setState(() {
+                                      message = res;
+                                      _dataLed.lastentry = brightness.round();
+                                    });
+                                  }),
+                      ),
+                    ],
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
-                  child: RaisedButton(
-                      color: Colors.blue,
-                      child: Text("Update"),
-                      onPressed: hasChanged == false
-                          ? null
-                          : () async {
-                              var res = await updateData();
-                              print(res);
-                              setState(() {
-                                message = res;
-                                _dataLed.lastentry = brightness.round();
-                              });
-                            }),
                 ),
                 message != null
                     ? Container(
