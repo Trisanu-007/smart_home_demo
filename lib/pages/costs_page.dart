@@ -5,6 +5,7 @@ import 'package:smart_home_demo/constants/form_field_design.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_home_demo/constants/constants.dart';
 import 'package:smart_home_demo/classes/cost.dart';
+import 'package:smart_home_demo/config.dart';
 
 class CostsPage extends StatefulWidget {
   @override
@@ -56,6 +57,7 @@ class _CostsPageState extends State<CostsPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: primaryColor,
       child: Form(
         child: Column(
           children: [
@@ -66,14 +68,15 @@ class _CostsPageState extends State<CostsPage> {
                   Text(
                     "Current rate :",
                     style: TextStyle(
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
                   Text(
                     "Rs. $cost",
                     style: TextStyle(
-                      fontSize: 15.0,
+                      fontSize: 20.0,
                       color: Colors.green,
                     ),
                   ),
@@ -86,8 +89,8 @@ class _CostsPageState extends State<CostsPage> {
                 "Find out your cost per day (incl. today):",
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
             ),
@@ -107,12 +110,27 @@ class _CostsPageState extends State<CostsPage> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-              child: RaisedButton(
-                child: Text("Check !"),
-                color: Colors.blue,
-                onPressed: () {
-                  getCostList();
-                },
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.deepOrangeAccent.withOpacity(0.5),
+                      blurRadius: 30,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.red)
+                  ),
+                  child: Text("Check !"),
+                  color: Colors.deepOrange,
+                  onPressed: () {
+                    getCostList();
+                  },
+                ),
               ),
             ),
             costData.length > 0
