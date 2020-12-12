@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "733735819779",
+    "firebase_url": "https://nodemcu-smarthome-c7c25.firebaseio.com",
+    "project_id": "nodemcu-smarthome-c7c25",
+    "storage_bucket": "nodemcu-smarthome-c7c25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733735819779:android:516aa322cfd606b6620c36",
+        "android_client_info": {
+          "package_name": "com.example.smart_home_demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733735819779-ub074dfrbi7ib20um7c62ckhnuam3d02.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart_home_demo",
+            "certificate_hash": "121d90111f75fed91f19afac81075a344baf1234"
+          }
+        },
+        {
+          "client_id": "733735819779-mm1es95itoejkh4481dkujrhnip44sij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBanqlApxf-o4g-AY7uNJy65CUad9jl7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733735819779-mm1es95itoejkh4481dkujrhnip44sij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
