@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:smart_home_demo/constants/loading.dart';
+import 'package:smart_home_demo/config.dart';
 
 class Schedule extends StatefulWidget {
   @override
@@ -39,6 +40,7 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: primaryColor,
       padding: EdgeInsets.all(32),
       child: Form(
         key: _key,
@@ -46,15 +48,18 @@ class _ScheduleState extends State<Schedule> {
           children: <Widget>[
             Container(
               child: Text(
-                "Enter the number of hrs and mins after which you want your device to function",
+                "Enter the number of hours and minutess after which you want your device to function",
                 style: TextStyle(
                   fontSize: 20.0,
+                  color: Colors.white,
                 ),
               ),
             ),
             TextFormField(
               decoration: InputDecoration(
                 hintText: "Enter hours",
+                hintStyle: TextStyle( color: Colors.white70),
+                fillColor: Colors.white,
               ),
               controller: myController,
               validator: (value) {
@@ -71,6 +76,12 @@ class _ScheduleState extends State<Schedule> {
             TextFormField(
               decoration: InputDecoration(
                 hintText: "Enter minutes",
+                hintStyle: TextStyle( color: Colors.white70),
+                // border: OutlineInputBorder(
+                //   borderSide: BorderSide(
+                //     color: Colors.teal,
+                //   ),
+                // ),
               ),
               controller: myController1,
               validator: (value) {
@@ -86,38 +97,54 @@ class _ScheduleState extends State<Schedule> {
             ),
             Container(
               margin: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: FlatButton(
-                child: Text("Set schedule"),
-                color: Colors.blue,
-                textColor: Colors.white,
-                onPressed: () async {
-                  var hr =
-                      int.parse(myController.text) + new DateTime.now().hour;
-                  var min =
-                      int.parse(myController1.text) + new DateTime.now().minute;
-                  //print(now);
-                  if (_key.currentState.validate()) {
-                    print("Your data is submitted");
-                    str = hr.toString() + ":" + min.toString();
-                    setState(() {
-                      loading = true;
-                    });
+              child: Container(
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.deepOrangeAccent.withOpacity(0.5),
+                      blurRadius: 25,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
 
-                    await databaseRef.child("time").set(str);
-                    await databaseRef.child("isTimeSet").set(true);
-                    setState(() {
-                      loading = false;
-                    });
-                    return showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content: Text("Your device is scheduled at : " + str),
-                        );
-                      },
-                    );
-                  }
-                },
+                  ),
+                  splashColor: Colors.grey,
+                  child: Text("Set schedule"),
+                  color: Colors.deepOrange,
+                  textColor: Colors.black,
+                  onPressed: () async {
+                    var hr =
+                        int.parse(myController.text) + new DateTime.now().hour;
+                    var min =
+                        int.parse(myController1.text) + new DateTime.now().minute;
+                    //print(now);
+                    if (_key.currentState.validate()) {
+                      print("Your data is submitted");
+                      str = hr.toString() + ":" + min.toString();
+                      setState(() {
+                        loading = true;
+                      });
+
+                      await databaseRef.child("time").set(str);
+                      await databaseRef.child("isTimeSet").set(true);
+                      setState(() {
+                        loading = false;
+                      });
+                      return showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            content: Text("Your device is scheduled at : " + str),
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
               ),
             ),
             loading == true ? LoadingScreen() : Container(),

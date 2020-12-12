@@ -3,6 +3,7 @@ import 'package:smart_home_demo/pages/costs_page.dart';
 import 'package:smart_home_demo/pages/home_page.dart';
 import 'package:smart_home_demo/pages/schedule.dart';
 import 'package:smart_home_demo/pages/settings.dart';
+import 'package:smart_home_demo/config.dart';
 
 void main() {
   runApp(MyApp());
@@ -56,16 +57,16 @@ class _MyHomePageState extends State<MyHomePage> {
           _appBarTitles.elementAt(selectedIndex),
         ),
         centerTitle: true,
+        backgroundColor: primaryColor,
       ),
       body: Container(
         child: _wOption.elementAt(selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        //fixedColor: Colors.black,
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: primaryColor,
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.blue,
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: Colors.white,
         onTap: handleOnTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -76,16 +77,43 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.monetization_on),
             label: "Cost",
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.schedule),
-            label: "Schedule",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Settings",
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.settings),
+          //   label: "Settings",
+          // ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.schedule),
+           label: "Schedule",
+            )
         ],
       ),
     );
   }
 }
+
+
+// bottomNavigationBar: BottomNavigationBar(
+// currentIndex: selectedIndex,
+// selectedItemColor: Colors.deepOrange,
+// unselectedItemColor: Colors.white,
+// backgroundColor: primaryColor,
+// onTap: handleOnTap,
+// items: <BottomNavigationBarItem>[
+// BottomNavigationBarItem(
+// icon: Icon(Icons.home),
+// label: "Home",
+// ),
+// BottomNavigationBarItem(
+// icon: Icon(Icons.monetization_on),
+// label: "Cost",
+// ),
+// BottomNavigationBarItem(
+// icon: Icon(Icons.schedule),
+// label: "Schedule",
+// ),
+// BottomNavigationBarItem(
+// icon: Icon(Icons.settings),
+// label: "Settings",
+// ),
+// ],
+// ),

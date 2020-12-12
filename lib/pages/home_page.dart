@@ -5,6 +5,7 @@ import 'package:smart_home_demo/classes/data.dart';
 import 'package:smart_home_demo/constants/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:smart_home_demo/constants/loading.dart';
+import 'package:smart_home_demo/config.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -91,6 +92,7 @@ class _HomeState extends State<Home> {
     return _dataLed == null
         ? LoadingScreen()
         : Container(
+            color: primaryColor,
             child: ListView(
               children: <Widget>[
                 Container(
@@ -100,6 +102,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -112,6 +115,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -130,7 +134,7 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   padding: EdgeInsets.all(5),
-                  child: Divider(color: Colors.black, thickness: 2.0),
+                  child: Divider(color: Colors.black12, thickness: 2.0),
                 ),
                 Row(
                   children: [
@@ -140,6 +144,7 @@ class _HomeState extends State<Home> {
                         "Name :",
                         style: TextStyle(
                           fontSize: 20.0,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -151,6 +156,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -163,6 +169,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -175,7 +182,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 15.0,
                           //fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: Colors.deepOrangeAccent,
                         ),
                       ),
                     ),
@@ -186,7 +193,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 15.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.brown,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -201,7 +208,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 15.0,
                           //fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -227,6 +234,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -237,6 +245,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
