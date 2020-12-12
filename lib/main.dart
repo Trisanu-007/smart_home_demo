@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_home_demo/pages/costs_page.dart';
 import 'package:smart_home_demo/pages/home_page.dart';
+import 'package:smart_home_demo/pages/schedule.dart';
 import 'package:smart_home_demo/pages/settings.dart';
 
 void main() {
@@ -32,12 +33,14 @@ class _MyHomePageState extends State<MyHomePage> {
   static List<Widget> _wOption = <Widget>[
     Home(),
     CostsPage(),
+    Schedule(),
     Settings(),
   ];
 
   static List<String> _appBarTitles = <String>[
     "Home page",
     "Check your costs",
+    "Schedule your device",
     "Settings"
   ];
 
@@ -58,6 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _wOption.elementAt(selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        //fixedColor: Colors.black,
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.grey,
         currentIndex: selectedIndex,
         selectedItemColor: Colors.blue,
         onTap: handleOnTap,
@@ -69,6 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on),
             label: "Cost",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.schedule),
+            label: "Schedule",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
