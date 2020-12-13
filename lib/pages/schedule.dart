@@ -59,8 +59,9 @@ class _ScheduleState extends State<Schedule> {
               decoration: InputDecoration(
                 hintText: "Enter hours",
                 hintStyle: TextStyle( color: Colors.white70),
-                fillColor: Colors.white,
+                //fillColor: Colors.white,
               ),
+              style: TextStyle(color: Colors.white),
               controller: myController,
               validator: (value) {
                 if (value.isEmpty) {
@@ -82,7 +83,9 @@ class _ScheduleState extends State<Schedule> {
                 //     color: Colors.teal,
                 //   ),
                 // ),
+
               ),
+              style: TextStyle(color: Colors.white),
               controller: myController1,
               validator: (value) {
                 if (value.isEmpty) {
@@ -109,7 +112,7 @@ class _ScheduleState extends State<Schedule> {
                 ),
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
+                    borderRadius: BorderRadius.circular(18.0),
 
                   ),
                   splashColor: Colors.grey,

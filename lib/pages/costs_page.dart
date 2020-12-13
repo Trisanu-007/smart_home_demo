@@ -7,6 +7,11 @@ import 'package:smart_home_demo/constants/constants.dart';
 import 'package:smart_home_demo/classes/cost.dart';
 import 'package:smart_home_demo/config.dart';
 
+import '../config.dart';
+import '../config.dart';
+import '../config.dart';
+import '../config.dart';
+
 class CostsPage extends StatefulWidget {
   @override
   _CostsPageState createState() => _CostsPageState();
@@ -94,18 +99,32 @@ class _CostsPageState extends State<CostsPage> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: DropdownButtonFormField(
-                decoration: textInputDecoration,
-                value: curr_day,
-                items: days.map((day) {
-                  return DropdownMenuItem(
-                    value: day,
-                    child: Text("$day days before today"),
-                  );
-                }).toList(),
-                onChanged: (val) => setState(() => curr_day = val),
+            Container(
+              decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(10)),
+
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  canvasColor: primaryColor,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      fillColor: primaryColor,
+                    ),
+                    value: curr_day,
+                    items: days.map((day) {
+                      return DropdownMenuItem(
+                        
+                        value: day,
+                        child: Text("$day days before today", style: TextStyle(color: Colors.white),),
+                      );
+                    }).toList(),
+                    onChanged: (val) => setState(() => curr_day = val),
+                  ),
+                ),
               ),
             ),
             Padding(
@@ -144,17 +163,19 @@ class _CostsPageState extends State<CostsPage> {
                           return Container(
                             padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                             child: Card(
+                              color: primaryColor,
+                              shadowColor: Colors.blueAccent,
                               child: ListTile(
                                 leading: CircleAvatar(
-                                  backgroundColor: Colors.blue,
-                                  child: Text("${index + 1}"),
+                                  backgroundColor: Colors.deepOrange,
+                                  child: Text("${index + 1}",style: TextStyle(color: Colors.black)),
                                 ),
                                 title: costdata.value == "NA"
-                                    ? Text("Cost : Not found")
-                                    : Text("Cost : Rs.${costdata.value}"),
+                                    ? Text("Cost : Not found",style: TextStyle(color: Colors.white))
+                                    : Text("Cost : Rs.${costdata.value}",style: TextStyle(color: Colors.white)),
                                 isThreeLine: true,
                                 subtitle: Text(
-                                  "Date:${costdata.date}  Message:${costdata.message}",
+                                  "Date:${costdata.date}  Message:${costdata.message}",style: TextStyle(color: Colors.white)
                                 ),
                               ),
                             ),
