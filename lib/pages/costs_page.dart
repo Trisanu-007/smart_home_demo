@@ -123,8 +123,7 @@ class _CostsPageState extends State<CostsPage> {
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.red)
-                  ),
+                      side: BorderSide(color: Colors.red)),
                   child: Text("Check !"),
                   color: Colors.deepOrange,
                   onPressed: () {
@@ -135,24 +134,28 @@ class _CostsPageState extends State<CostsPage> {
             ),
             costData.length > 0
                 ? Container(
+                    //padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                     child: Expanded(
                       child: ListView.builder(
                         //reverse: true,
                         itemCount: costData.length,
                         itemBuilder: (BuildContext context, int index) {
                           CostData costdata = costData[index];
-                          return Card(
-                            child: ListTile(
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.blue,
-                                child: Text("${index + 1}"),
-                              ),
-                              title: costdata.value == "NA"
-                                  ? Text("Cost : Not found")
-                                  : Text("Cost : Rs.${costdata.value}"),
-                              isThreeLine: true,
-                              subtitle: Text(
-                                "Date:${costdata.date}  Message:${costdata.message}",
+                          return Container(
+                            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                            child: Card(
+                              child: ListTile(
+                                leading: CircleAvatar(
+                                  backgroundColor: Colors.blue,
+                                  child: Text("${index + 1}"),
+                                ),
+                                title: costdata.value == "NA"
+                                    ? Text("Cost : Not found")
+                                    : Text("Cost : Rs.${costdata.value}"),
+                                isThreeLine: true,
+                                subtitle: Text(
+                                  "Date:${costdata.date}  Message:${costdata.message}",
+                                ),
                               ),
                             ),
                           );

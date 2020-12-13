@@ -37,21 +37,20 @@ class _HomeState extends State<Home> {
       List<Feeds> feeds = new List<Feeds>();
       var feedApi = parsedJson["feeds"];
       var lastEntry;
-      print(feedApi[0]["entry_id"].runtimeType);
-
+      print(feedApi.length); //feedApi[0]["entry_id"].runtimeType);
       for (int i = 0; i < feedApi.length; i++) {
         Feeds newFeed = new Feeds(
           createdAt: feedApi[i]["created_at"],
           entryId: feedApi[i]["entry_id"],
-          field: int.parse(feedApi[i]["field$device1"]),
+          field: double.parse(feedApi[i]["field$device1"]),
         );
+        print(feedApi[i]["field$device1"].runtimeType);
         feeds.add(newFeed);
 
         if (newFeed.entryId == lastEntryId) {
           lastEntry = newFeed.field;
         }
       }
-
       return DataLed(
         id: parsedJson["channel"]["id"],
         lastEntryId: parsedJson["channel"]["last_entry_id"],
@@ -65,10 +64,10 @@ class _HomeState extends State<Home> {
   }
 
   void fillInitialData() async {
-    DataLed dt = (await getDataFromApi());
+    DataLed dt = await getDataFromApi();
     setState(() {
       _dataLed = dt;
-      brightness = _dataLed.lastentry.toDouble();
+      brightness = _dataLed.lastentry;
     });
   }
 
@@ -295,7 +294,7 @@ class _HomeState extends State<Home> {
                                     print(res);
                                     setState(() {
                                       message = res;
-                                      _dataLed.lastentry = brightness.round();
+                                      _dataLed.lastentry = brightness;
                                     });
                                   }),
                       ),

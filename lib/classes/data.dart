@@ -2,7 +2,7 @@ class DataLed {
   int id;
   String updatedAt;
   int lastEntryId;
-  int lastentry;
+  double lastentry;
   String message;
   List<Feeds> feeds;
 
@@ -18,7 +18,8 @@ class DataLed {
 class Feeds {
   String createdAt;
   int entryId;
-  int field;
+  //int field;
+  double field;
 
   Feeds({this.createdAt, this.entryId, this.field});
 }
