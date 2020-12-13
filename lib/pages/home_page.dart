@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
                       child: Text(
                         "$num_of_devices",
                         style: TextStyle(
-                          color: Colors.red,
+                          color: Colors.white,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
                         style: TextStyle(
                           fontSize: 15.0,
                           //fontWeight: FontWeight.bold,
-                          color: Colors.deepOrangeAccent,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -257,8 +257,8 @@ class _HomeState extends State<Home> {
                       Container(
                         child: Switch(
                           value: brightness > 0 ? true : false,
-                          activeTrackColor: Colors.blue,
-                          activeColor: Colors.green,
+                          activeTrackColor: Colors.white,
+                          activeColor: Colors.deepOrange,
                           onChanged: (val) {
                             setState(() {
                               brightness = val == true ? 1 : 0;
@@ -284,8 +284,17 @@ class _HomeState extends State<Home> {
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(30, 5, 30, 5),
+                        decoration: BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.deepOrangeAccent.withOpacity(0.5),
+                              blurRadius: 30,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
                         child: RaisedButton(
-                            color: Colors.blue,
+                            color: Colors.deepOrange,
                             child: Text("Update"),
                             onPressed: hasChanged == false
                                 ? null
