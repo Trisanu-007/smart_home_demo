@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
         Feeds newFeed = new Feeds(
           createdAt: feedApi[i]["created_at"],
           entryId: feedApi[i]["entry_id"],
-          field: double.parse(feedApi[i]["field$device1"]),
+          field: double.parse(feedApi[i]["field$device1"] ?? 0.0),
         );
         print(feedApi[i]["field$device1"].runtimeType);
         feeds.add(newFeed);
